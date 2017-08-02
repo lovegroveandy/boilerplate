@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
 	entry: {
@@ -13,10 +14,15 @@ module.exports = {
 	plugins: [
 		new CleanWebpackPlugin(['dist']),
 		new HtmlWebpackPlugin({
-			title: 'Andy Boilerplate'
+			template: 'src/index.html',
+			inject: 'body'
 		}),
-		new webpack.optimize.UglifyJsPlugin({
-			sourceMap: options.devtool && (options.devtool.indexOf("sourcemap") >= 0 || options.devtool.indexOf("source-map") >= 0)
+		new ExtractTextPlugin('style.css'),
+		// new webpack.optimize.UglifyJsPlugin({
+		// 	sourceMap: options.devtool && (options.devtool.indexOf("sourcemap") >= 0 || options.devtool.indexOf("source-map") >= 0)
+		// }),
+		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': JSON.stringify('production')
 		})
 	],
 	output: {
@@ -26,11 +32,21 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.css$/,
-				use: [
-					'style-loader',
-					'css-loader'
-				]
+				test: /\.less$/,
+				use: ExtractTextPlugin.extract({
+					fallback: 'style-loader',
+					use: ['css-loader', 'less-loader']
+				})
+			},
+			{
+				test: /\.js$/,
+				use: {
+					loader: 'babel-loader',
+					options: {
+						presets: ['env', 'react']
+					}
+				},
+				exclude: /node_modules/
 			},
 			{
 				test: /\.(png|svg|jpg|gif)$/,
