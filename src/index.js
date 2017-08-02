@@ -1,18 +1,25 @@
-import './style.less';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+import Title from './reducers/title';
+import Home from './containers/home';
+import { Provider } from 'react-redux';
+
+let store = createStore(Title);
 
 class App extends React.Component {
 	render() {
 		return (
 			<div>
-				<h1>Andy' Boiler</h1>
+				<Home store={store} />
 			</div>
 		)
 	}
 }
 
 ReactDOM.render(
-	<App/>,
+	<Provider store={store}>
+		<App/>
+	</Provider>,
 	document.getElementById('app')
 );
