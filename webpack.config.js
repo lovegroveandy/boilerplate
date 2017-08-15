@@ -11,6 +11,7 @@ module.exports = {
 	devServer: {
 		contentBase: './dist'
 	},
+	devtool: 'inline-source-map',
 	plugins: [
 		new CleanWebpackPlugin(['dist']),
 		new HtmlWebpackPlugin({
