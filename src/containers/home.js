@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Header from '../components/header';
 import { setTitle } from '../actions/title';
 import { connect } from 'react-redux';
 
-export class Home extends React.Component {
+export class Home extends Component {
 	constructor() {
 		super();
 		this.onChange = this.onChange.bind(this);

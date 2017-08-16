@@ -5,6 +5,6 @@ export default ({ title, changeTitle }) => {
 	return (
 		<div>
 			<h1>{title}</h1>
-			<a href="" onClick={changeTitle} >hello</a>
+			<a href="" onClick={changeTitle} >click to change</a>
 		</div>
 )}
