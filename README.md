@@ -23,5 +23,5 @@ Then you should be able to open http://localhost:8081 in your browser.
 ### Running the tests
 
 ```sh
-$ yarn test
+$ npm run test
 ```
