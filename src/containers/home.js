@@ -4,23 +4,24 @@ import { setTitle } from '../actions/title';
 import { connect } from 'react-redux';
 
 class Home extends React.Component {
-
-	componentDidMount() {
-
-	}
+	// constructor() {
+	// 	super();
+	// }
 
 	change (control, e) {
 		e.preventDefault();
-		this.props.store.dispatch(setTitle('Henry'))
+		setTitle('Henry')
 	}
 
 	render() {
-		const { stateProps } = this.props;
+		const { boilerTitle } = this.props;
 
 		return (
-			<Header title={stateProps} changeTitle={this.change.bind(this, this)} />
+			<Header title={boilerTitle} changeTitle={this.change.bind(this, this)} />
 		)
 	}
 }
 
-export default connect()(Home);
+export default connect(
+	(boilerTitle) => ({boilerTitle})
+)(Home);
